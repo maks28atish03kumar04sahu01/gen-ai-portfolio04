@@ -1,0 +1,451 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import '@fontsource/poppins/400.css';
+@import '@fontsource/poppins/500.css';
+@import '@fontsource/poppins/600.css';
+@import '@fontsource/poppins/700.css';
+@import '@fontsource/poppins/800.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/jetbrains-mono/400.css';
+@import '@fontsource/jetbrains-mono/500.css';
+
+@layer base {
+  :root {
+    /* ===== CINEMATIC DARK PALETTE ===== */
+    --background: 220 15% 5%;
+    --foreground: 45 20% 95%;
+
+    --card: 220 15% 8%;
+    --card-foreground: 45 20% 95%;
+
+    --popover: 220 15% 10%;
+    --popover-foreground: 45 20% 95%;
+
+    /* Warm cinematic gold as primary */
+    --primary: 38 92% 50%;
+    --primary-foreground: 220 15% 5%;
+
+    --secondary: 220 12% 12%;
+    --secondary-foreground: 45 20% 90%;
+
+    --muted: 220 10% 18%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 220 12% 15%;
+    --accent-foreground: 45 20% 95%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 45 20% 95%;
+
+    --border: 220 12% 15%;
+    --input: 220 12% 12%;
+    --ring: 38 92% 50%;
+
+    --radius: 0.5rem;
+
+    /* ===== CHANNEL-SPECIFIC PALETTES ===== */
+    /* CodeDecode: Deep Ocean + Electric Cyan */
+    --codedecode-bg: 210 60% 8%;
+    --codedecode-primary: 195 100% 45%;
+    --codedecode-accent: 175 100% 40%;
+    --codedecode-glow: 195 100% 60%;
+
+    /* GameChanger: Midnight Violet + Neon Magenta */
+    --gamechanger-bg: 270 50% 8%;
+    --gamechanger-primary: 280 80% 55%;
+    --gamechanger-accent: 320 90% 55%;
+    --gamechanger-glow: 320 100% 65%;
+
+    /* Horror Night: Charcoal + Blood Crimson */
+    --horror-bg: 0 5% 5%;
+    --horror-primary: 0 75% 45%;
+    --horror-accent: 0 85% 50%;
+    --horror-glow: 0 100% 55%;
+    --horror-secondary: 140 8% 20%;
+
+    /* ===== SPLIT-SCREEN COMMAND SIDEBAR ===== */
+    --command-width: 280px;
+    --command-collapsed: 72px;
+    --command-bg: 220 20% 4%;
+    --command-border: 220 15% 12%;
+    --command-hover: 220 15% 10%;
+
+    /* ===== CINEMATIC EFFECTS ===== */
+    --film-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    
+    /* Cinematic vignette */
+    --vignette: radial-gradient(ellipse at center, transparent 0%, transparent 60%, hsl(220 15% 2% / 0.6) 100%);
+
+    /* ===== TYPOGRAPHY ===== */
+    --font-display: 'Poppins', system-ui, sans-serif;
+    --font-body: 'Inter', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    /* ===== MOTION TOKENS ===== */
+    --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --duration-fast: 150ms;
+    --duration-base: 300ms;
+    --duration-slow: 600ms;
+    --duration-dramatic: 1000ms;
+
+    /* ===== SHADOWS ===== */
+    --shadow-cinematic: 0 25px 80px -20px hsl(0 0% 0% / 0.8);
+    --shadow-glow-primary: 0 0 60px -10px hsl(var(--primary) / 0.4);
+    --shadow-glow-codedecode: 0 0 80px -20px hsl(var(--codedecode-glow) / 0.5);
+    --shadow-glow-gamechanger: 0 0 80px -20px hsl(var(--gamechanger-glow) / 0.5);
+    --shadow-glow-horror: 0 0 80px -20px hsl(var(--horror-glow) / 0.4);
+
+    /* Sidebar tokens (for shadcn compatibility) */
+    --sidebar-background: var(--command-bg);
+    --sidebar-foreground: var(--foreground);
+    --sidebar-primary: var(--primary);
+    --sidebar-primary-foreground: var(--primary-foreground);
+    --sidebar-accent: var(--accent);
+    --sidebar-accent-foreground: var(--accent-foreground);
+    --sidebar-border: var(--command-border);
+    --sidebar-ring: var(--ring);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: var(--font-body);
+    background-image: var(--film-grain);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-tight;
+  }
+
+  code, pre {
+    font-family: var(--font-mono);
+  }
+
+  /* Smooth scrollbar for cinematic feel */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-background;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-muted rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-muted-foreground;
+  }
+}
+
+@layer components {
+  /* ===== SPLIT-SCREEN COMMAND SIDEBAR ===== */
+  .command-sidebar {
+    @apply fixed left-0 top-0 bottom-0 z-40;
+    width: var(--command-width);
+    background: hsl(var(--command-bg));
+    border-right: 1px solid hsl(var(--command-border));
+    transition: width var(--duration-slow) var(--ease-cinematic);
+  }
+
+  .command-sidebar.collapsed {
+    width: var(--command-collapsed);
+  }
+
+  .command-content {
+    margin-left: var(--command-width);
+    transition: margin-left var(--duration-slow) var(--ease-cinematic);
+  }
+
+  .command-content.expanded {
+    margin-left: var(--command-collapsed);
+  }
+
+  /* ===== CHANNEL SWITCHER ORBS ===== */
+  .channel-orb {
+    @apply relative flex items-center justify-center rounded-2xl cursor-pointer;
+    @apply transition-all duration-300;
+    width: 48px;
+    height: 48px;
+  }
+
+  .channel-orb::before {
+    @apply absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300;
+    content: '';
+  }
+
+  .channel-orb:hover::before {
+    @apply opacity-100;
+  }
+
+  .channel-orb.codedecode {
+    @apply bg-codedecode-primary/10 text-codedecode-primary;
+  }
+  .channel-orb.codedecode::before {
+    box-shadow: var(--shadow-glow-codedecode);
+  }
+  .channel-orb.codedecode.active {
+    @apply bg-codedecode-primary/20;
+    box-shadow: var(--shadow-glow-codedecode);
+  }
+
+  .channel-orb.gamechanger {
+    @apply bg-gamechanger-primary/10 text-gamechanger-primary;
+  }
+  .channel-orb.gamechanger::before {
+    box-shadow: var(--shadow-glow-gamechanger);
+  }
+  .channel-orb.gamechanger.active {
+    @apply bg-gamechanger-primary/20;
+    box-shadow: var(--shadow-glow-gamechanger);
+  }
+
+  .channel-orb.horror {
+    @apply bg-horror-primary/10 text-horror-primary;
+  }
+  .channel-orb.horror::before {
+    box-shadow: var(--shadow-glow-horror);
+  }
+  .channel-orb.horror.active {
+    @apply bg-horror-primary/20;
+    box-shadow: var(--shadow-glow-horror);
+  }
+
+  /* ===== CINEMATIC CARDS ===== */
+  .cine-card {
+    @apply relative overflow-hidden rounded-xl border border-border bg-card;
+    @apply transition-all duration-500;
+    box-shadow: var(--shadow-cinematic);
+  }
+
+  .cine-card::before {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    content: '';
+    background: var(--vignette);
+    pointer-events: none;
+  }
+
+  .cine-card:hover {
+    @apply border-primary/30;
+    transform: translateY(-4px) scale(1.01);
+  }
+
+  .cine-card:hover::before {
+    @apply opacity-100;
+  }
+
+  /* ===== SUBSCRIBE BUTTON VARIANTS ===== */
+  .subscribe-btn {
+    @apply relative inline-flex items-center justify-center gap-2 px-6 py-3;
+    @apply font-semibold rounded-full overflow-hidden;
+    @apply transition-all duration-300;
+    background: linear-gradient(135deg, hsl(0 75% 45%) 0%, hsl(0 85% 55%) 100%);
+    @apply text-foreground;
+    box-shadow: 0 4px 20px -5px hsl(0 75% 45% / 0.5);
+  }
+
+  .subscribe-btn::before {
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    content: '';
+    background: linear-gradient(135deg, hsl(0 85% 55%) 0%, hsl(0 95% 60%) 100%);
+  }
+
+  .subscribe-btn:hover::before {
+    @apply opacity-100;
+  }
+
+  .subscribe-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px -5px hsl(0 75% 45% / 0.6);
+  }
+
+  .subscribe-btn span {
+    @apply relative z-10;
+  }
+
+  /* ===== CINEMATIC TEXT EFFECTS ===== */
+  .text-glow {
+    text-shadow: 0 0 40px currentColor;
+  }
+
+  .text-cinematic {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      135deg,
+      hsl(45 30% 90%) 0%,
+      hsl(38 92% 60%) 50%,
+      hsl(45 30% 90%) 100%
+    );
+    background-size: 200% 100%;
+  }
+
+  /* ===== FILM STRIP DECORATION ===== */
+  .film-strip {
+    @apply absolute pointer-events-none;
+    background: repeating-linear-gradient(
+      to right,
+      transparent 0px,
+      transparent 10px,
+      hsl(var(--muted)) 10px,
+      hsl(var(--muted)) 12px
+    );
+    height: 24px;
+    opacity: 0.3;
+  }
+
+  /* ===== DRAMATIC REVEAL ===== */
+  .reveal-mask {
+    clip-path: inset(0 100% 0 0);
+    animation: reveal-horizontal 1s var(--ease-cinematic) forwards;
+  }
+
+  @keyframes reveal-horizontal {
+    to {
+      clip-path: inset(0 0 0 0);
+    }
+  }
+
+  /* ===== FLOATING PARTICLES ===== */
+  .particle {
+    @apply absolute rounded-full pointer-events-none;
+    animation: float-particle 20s linear infinite;
+  }
+
+  @keyframes float-particle {
+    0% {
+      transform: translateY(100vh) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 0.6;
+    }
+    90% {
+      opacity: 0.6;
+    }
+    100% {
+      transform: translateY(-10vh) rotate(720deg);
+      opacity: 0;
+    }
+  }
+
+  /* ===== LETTERBOX EFFECT ===== */
+  .letterbox {
+    @apply relative;
+  }
+
+  .letterbox::before,
+  .letterbox::after {
+    @apply absolute left-0 right-0 bg-background z-10;
+    content: '';
+    height: 8%;
+  }
+
+  .letterbox::before {
+    @apply top-0;
+  }
+
+  .letterbox::after {
+    @apply bottom-0;
+  }
+
+  /* ===== GLASS MORPHISM ===== */
+  .glass {
+    @apply bg-background/60 backdrop-blur-2xl;
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  .glass-dark {
+    @apply bg-background/80 backdrop-blur-xl;
+    border: 1px solid hsl(var(--border) / 0.3);
+  }
+
+  /* ===== NAV LINKS ===== */
+  .nav-link {
+    @apply relative px-3 py-2 text-sm font-medium text-muted-foreground;
+    @apply transition-colors duration-200;
+  }
+
+  .nav-link:hover {
+    @apply text-foreground;
+  }
+
+  .nav-link.active {
+    @apply text-primary;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-1/2 h-0.5 w-0 bg-primary;
+    @apply transition-all duration-300;
+    content: '';
+    transform: translateX(-50%);
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    @apply w-full;
+  }
+
+  /* ===== CODE BLOCKS (CodeDecode) ===== */
+  .code-block {
+    @apply rounded-lg p-4 font-mono text-sm overflow-x-auto;
+    background: hsl(var(--codedecode-bg));
+    border: 1px solid hsl(var(--codedecode-primary) / 0.2);
+  }
+
+  /* ===== READING PROGRESS ===== */
+  .reading-progress {
+    @apply fixed left-0 top-0 z-50 h-0.5 bg-primary;
+    transition: width 50ms linear;
+  }
+}
+
+@layer utilities {
+  /* Animation delays */
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
+  .delay-800 { animation-delay: 800ms; }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Responsive command sidebar */
+  @media (max-width: 1023px) {
+    .command-sidebar {
+      transform: translateX(-100%);
+    }
+    .command-sidebar.open {
+      transform: translateX(0);
+    }
+    .command-content {
+      margin-left: 0 !important;
+    }
+  }
+}
